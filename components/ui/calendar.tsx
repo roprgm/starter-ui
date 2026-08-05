@@ -3,6 +3,7 @@
 import { Button } from "@base-ui/react/button";
 import { useState } from "react";
 import { ChevronIcon } from "@/components/icons/chevron-icon";
+import { cn } from "@/lib/styles";
 
 const WEEKDAYS = [
 	{ short: "S", label: "Sunday" },
@@ -102,9 +103,6 @@ export function Calendar({ onSelect, selected }: CalendarProps) {
 					const outside = day.getMonth() !== month.getMonth();
 					const active = selected ? isSameDay(day, selected) : false;
 					const current = isSameDay(day, today);
-					const currentClassName = current
-						? "underline underline-offset-4"
-						: "";
 
 					return (
 						<div key={day.toISOString()}>
@@ -115,7 +113,9 @@ export function Calendar({ onSelect, selected }: CalendarProps) {
 								disabled={outside}
 								onClick={() => onSelect(day)}
 							>
-								<span className={currentClassName}>{day.getDate()}</span>
+								<span className={cn(current && "underline underline-offset-4")}>
+									{day.getDate()}
+								</span>
 							</Button>
 						</div>
 					);

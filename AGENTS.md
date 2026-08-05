@@ -35,6 +35,7 @@ These rules apply to the entire repository.
 - Follow `DESIGN.md` for visual, interaction, and motion decisions.
 - Make loading, empty, error, disabled, keyboard, and reduced-motion behavior intentional.
 - Do not share Tailwind class lists through constants or style-only TypeScript modules. Compose styles through reusable React components instead.
+- For conditional classes, call `cn` inline with boolean conditions. Do not assign class names to local constants or select class strings with ternaries.
 - When a genuinely low-level visual primitive must be shared without a component, define it in CSS with Tailwind's layer system. Reserve this for effects such as fades, shadows, or shimmers, not component styling or layout.
 
 ## Verification
