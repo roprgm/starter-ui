@@ -1,12 +1,28 @@
 import { CopyButton } from "@/components/actions/copy-button";
 import { ShareButton } from "@/components/actions/share-button";
+import {
+	AlertDialogClose,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogRoot,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { DatePicker } from "@/components/ui/date-picker";
+import {
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogRoot,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import {
-	HoverCard,
 	HoverCardContent,
+	HoverCardRoot,
 	HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Input } from "@/components/ui/input";
@@ -34,8 +50,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { TimePicker } from "@/components/ui/time-picker";
 import {
-	Tooltip,
 	TooltipContent,
+	TooltipRoot,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 
@@ -103,18 +119,18 @@ export default function Home() {
 				<section>
 					<h2 className="mb-3 text-muted text-sm">Actions</h2>
 					<Card className="flex min-h-32 items-center justify-center gap-3">
-						<Tooltip>
+						<TooltipRoot>
 							<TooltipTrigger
 								render={
 									<CopyButton value="Copied from the component gallery" />
 								}
 							/>
 							<TooltipContent>Copy to clipboard</TooltipContent>
-						</Tooltip>
-						<Tooltip>
+						</TooltipRoot>
+						<TooltipRoot>
 							<TooltipTrigger render={<ShareButton content={shareContent} />} />
 							<TooltipContent>Share</TooltipContent>
-						</Tooltip>
+						</TooltipRoot>
 					</Card>
 				</section>
 
@@ -122,7 +138,9 @@ export default function Home() {
 					<h2 className="mb-3 text-muted text-sm">Menu</h2>
 					<Card>
 						<MenuRoot>
-							<MenuTrigger>Actions</MenuTrigger>
+							<MenuTrigger render={<Button variant="secondary" />}>
+								Actions
+							</MenuTrigger>
 							<MenuContent>
 								<MenuItem>Open project</MenuItem>
 								<MenuItem>Duplicate</MenuItem>
@@ -171,7 +189,7 @@ export default function Home() {
 				<section>
 					<h2 className="mb-3 text-muted text-sm">Hover card</h2>
 					<Card className="p-3">
-						<HoverCard>
+						<HoverCardRoot>
 							<HoverCardTrigger href="/ui">Nice UI Starter</HoverCardTrigger>
 							<HoverCardContent>
 								<p className="font-medium text-sm">Component gallery</p>
@@ -179,7 +197,49 @@ export default function Home() {
 									A quiet set of reusable interface primitives.
 								</p>
 							</HoverCardContent>
-						</HoverCard>
+						</HoverCardRoot>
+					</Card>
+				</section>
+
+				<section>
+					<h2 className="mb-3 text-muted text-sm">Dialogs</h2>
+					<Card className="flex flex-wrap gap-2.5">
+						<DialogRoot>
+							<DialogTrigger render={<Button variant="secondary" />}>
+								Open dialog
+							</DialogTrigger>
+							<DialogContent>
+								<DialogTitle>Project settings</DialogTitle>
+								<DialogDescription>
+									Review the details before continuing.
+								</DialogDescription>
+								<div className="flex justify-end">
+									<DialogClose render={<Button variant="secondary" />}>
+										Close
+									</DialogClose>
+								</div>
+							</DialogContent>
+						</DialogRoot>
+
+						<AlertDialogRoot>
+							<AlertDialogTrigger render={<Button variant="danger" />}>
+								Delete project
+							</AlertDialogTrigger>
+							<AlertDialogContent>
+								<AlertDialogTitle>Delete project?</AlertDialogTitle>
+								<AlertDialogDescription>
+									This action cannot be undone.
+								</AlertDialogDescription>
+								<div className="flex justify-end gap-2">
+									<AlertDialogClose render={<Button variant="secondary" />}>
+										Cancel
+									</AlertDialogClose>
+									<AlertDialogClose render={<Button variant="danger" />}>
+										Delete
+									</AlertDialogClose>
+								</div>
+							</AlertDialogContent>
+						</AlertDialogRoot>
 					</Card>
 				</section>
 
@@ -200,7 +260,7 @@ export default function Home() {
 				<section>
 					<h2 className="mb-3 text-muted text-sm">Date and time</h2>
 					<Card className="flex flex-wrap gap-3">
-						<DatePicker />
+						<DatePicker aria-label="Date" />
 						<TimePicker defaultValue="09:00" />
 					</Card>
 				</section>

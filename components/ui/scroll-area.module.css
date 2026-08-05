@@ -1,14 +1,10 @@
 .root {
 	--scrollbar-lane: 8px;
-	--scrollbar-block-inset: 6px;
-	--scrollbar-end-padding: 1px;
-
-	position: relative;
 	overflow: hidden;
 }
 
 .viewport {
-	overscroll-behavior: contain;
+	overscroll-behavior-y: contain;
 }
 
 .content {
@@ -19,24 +15,21 @@
 	z-index: 2;
 	display: flex;
 	justify-content: flex-end;
-	width: var(--scrollbar-lane);
-	margin-block: var(--scrollbar-block-inset);
-	padding-inline-end: var(--scrollbar-end-padding);
-	cursor: pointer;
-	user-select: none;
-	touch-action: none;
+	width: calc(var(--scrollbar-lane) + 2px);
+	margin-block: 5px;
+	padding-inline-end: 0px;
 }
 
 .thumb {
-	width: 4px;
+	width: 5px;
 	border-radius: 999px;
-	background: color-mix(in oklab, var(--text-muted) 38%, transparent);
+	background: color-mix(in oklab, var(--text-muted) 40%, transparent);
 	transition: background-color 150ms ease-out;
 }
 
 .scrollbar[data-hovering] .thumb,
 .scrollbar[data-scrolling] .thumb {
-	background: color-mix(in oklab, var(--text-muted) 55%, transparent);
+	background: color-mix(in oklab, var(--text-muted) 56%, transparent);
 }
 
 .fade {
@@ -54,11 +47,7 @@
 	top: 0;
 	background: linear-gradient(
 		to bottom,
-		color-mix(
-			in oklab,
-			var(--scroll-area-fade, var(--control)) 82%,
-			transparent
-		),
+		color-mix(in oklab, var(--control) 90%, transparent),
 		transparent
 	);
 }
@@ -67,11 +56,7 @@
 	bottom: 0;
 	background: linear-gradient(
 		to top,
-		color-mix(
-			in oklab,
-			var(--scroll-area-fade, var(--control)) 82%,
-			transparent
-		),
+		color-mix(in oklab, var(--control) 90%, transparent),
 		transparent
 	);
 }

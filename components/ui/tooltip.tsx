@@ -18,7 +18,7 @@ export function TooltipProvider({
 	);
 }
 
-export const Tooltip = TooltipPrimitive.Root;
+export const TooltipRoot = TooltipPrimitive.Root;
 export const TooltipTrigger = TooltipPrimitive.Trigger;
 
 type TooltipContentProps = Omit<TooltipPrimitive.Popup.Props, "className"> & {

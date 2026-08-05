@@ -32,11 +32,13 @@ without drawing attention to its animation.
 - Prefer spacing and tone over borders.
 - Use shadows sparingly; contrast should define most elevation.
 - Choose radii from the fixed pixel scale according to component size.
-- Cards are borderless and use `p-2` by default. Callers override spacing with
+- Cards are borderless and use `p-2.5` by default. Callers override spacing with
   `className` when their content needs it, such as `p-3` for text.
 - Menu, select, popover, hover-card, and tooltip panels compose the same popup
   surface: control background, subtle border, one-pixel dark outer ring, and a
   soft shadow. Popup arrows continue both the border and outer ring.
+- Dialogs reuse the card surface and add a dimmed backdrop, modal positioning,
+  border, and stronger elevation.
 
 ## Color
 
@@ -48,7 +50,7 @@ Tokens live in `app/globals.css`. The system contains:
 - Two text levels: foreground and muted.
 - One high-contrast primary, one quiet accent, and distinct danger colors for
   text and filled surfaces.
-- Four radius steps (`4px`, `8px`, `12px`, and `16px`). Component spacing stays
+- Four radius steps (`7px`, `10px`, `14px`, and `20px`). Component spacing stays
   local to the component that owns it.
 
 Add a token only when an existing semantic role cannot represent the need.

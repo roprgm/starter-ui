@@ -1,57 +1,34 @@
 "use client";
 
 import { Menu } from "@base-ui/react/menu";
-import { MenuCloseIcon } from "@/components/icons/menu-close-icon";
-import { Button } from "@/components/ui/button";
 import { PopupItem, PopupSurface } from "@/components/ui/popup";
 import { cn } from "@/lib/styles";
 
 export const MenuRoot = Menu.Root;
-
-const menuItemClassNames = {
-	default: "",
-	danger:
-		"text-danger data-highlighted:bg-danger-surface/20 data-highlighted:text-danger",
-} as const;
-
-type MenuTriggerProps = Omit<Menu.Trigger.Props, "className" | "render"> & {
-	className?: string;
-};
-
-export function MenuTrigger({
-	children,
-	className,
-	...props
-}: MenuTriggerProps) {
-	return (
-		<Menu.Trigger
-			{...props}
-			render={(triggerProps, state) => {
-				const iconState = state.open ? "close" : "menu";
-
-				return (
-					<Button
-						{...triggerProps}
-						className={cn("justify-start gap-2 font-normal", className)}
-						variant="secondary"
-					>
-						{children}
-						<MenuCloseIcon className="ml-auto text-muted" state={iconState} />
-					</Button>
-				);
-			}}
-		/>
-	);
-}
+export const MenuTrigger = Menu.Trigger;
 
 type MenuContentProps = Omit<Menu.Popup.Props, "className"> & {
+	align?: Menu.Positioner.Props["align"];
 	className?: string;
+	side?: Menu.Positioner.Props["side"];
+	sideOffset?: Menu.Positioner.Props["sideOffset"];
 };
 
-export function MenuContent({ className, ...props }: MenuContentProps) {
+export function MenuContent({
+	align = "end",
+	className,
+	side = "bottom",
+	sideOffset = 6,
+	...props
+}: MenuContentProps) {
 	return (
 		<Menu.Portal>
-			<Menu.Positioner align="end" className="z-50 outline-none" sideOffset={6}>
+			<Menu.Positioner
+				align={align}
+				className="z-50 outline-none"
+				side={side}
+				sideOffset={sideOffset}
+			>
 				<Menu.Popup
 					render={<PopupSurface className={cn("min-w-40", className)} />}
 					{...props}
@@ -63,7 +40,7 @@ export function MenuContent({ className, ...props }: MenuContentProps) {
 
 type MenuItemProps = Omit<Menu.Item.Props, "className"> & {
 	className?: string;
-	variant?: keyof typeof menuItemClassNames;
+	variant?: "default" | "danger";
 };
 
 export function MenuItem({
@@ -74,7 +51,13 @@ export function MenuItem({
 	return (
 		<Menu.Item
 			render={
-				<PopupItem className={cn(menuItemClassNames[variant], className)} />
+				<PopupItem
+					className={cn(
+						variant === "danger" &&
+							"text-danger data-highlighted:bg-danger-surface/20 data-highlighted:text-danger",
+						className,
+					)}
+				/>
 			}
 			{...props}
 		/>

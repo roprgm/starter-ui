@@ -3,9 +3,9 @@
 :root {
 	color-scheme: dark;
 	--canvas: oklch(0.14 0 0);
-	--control: oklch(0.19 0 0);
+	--control: oklch(0.18 0 0);
 	--control-hover: oklch(0.215 0 0);
-	--surface: oklch(0.24 0 0);
+	--surface: oklch(0.22 0 0);
 	--elevated: oklch(0.3 0 0);
 	--text: oklch(0.95 0 0);
 	--text-muted: oklch(0.68 0 0);

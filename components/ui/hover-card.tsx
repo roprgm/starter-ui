@@ -4,7 +4,7 @@ import { PreviewCard } from "@base-ui/react/preview-card";
 import { PopupArrow, PopupSurface } from "@/components/ui/popup";
 import { cn } from "@/lib/styles";
 
-export const HoverCard = PreviewCard.Root;
+export const HoverCardRoot = PreviewCard.Root;
 
 type HoverCardTriggerProps = Omit<PreviewCard.Trigger.Props, "className"> & {
 	className?: string;

@@ -1,7 +1,6 @@
 "use client";
 
 import { Select } from "@base-ui/react/select";
-import type { ReactNode } from "react";
 import { CheckIcon } from "@/components/icons/check-icon";
 import { ChevronIcon } from "@/components/icons/chevron-icon";
 import { Button } from "@/components/ui/button";
@@ -56,18 +55,29 @@ export function SelectValue({ className, ...props }: SelectValueProps) {
 	);
 }
 
-type SelectContentProps = {
-	children: ReactNode;
+type SelectContentProps = Omit<Select.Popup.Props, "className"> & {
+	align?: Select.Positioner.Props["align"];
 	className?: string;
+	side?: Select.Positioner.Props["side"];
+	sideOffset?: Select.Positioner.Props["sideOffset"];
 };
 
-export function SelectContent({ children, className }: SelectContentProps) {
+export function SelectContent({
+	align = "center",
+	children,
+	className,
+	side = "bottom",
+	sideOffset = 6,
+	...props
+}: SelectContentProps) {
 	return (
 		<Select.Portal>
 			<Select.Positioner
+				align={align}
 				alignItemWithTrigger={false}
 				className="z-50"
-				sideOffset={6}
+				side={side}
+				sideOffset={sideOffset}
 			>
 				<Select.Popup
 					render={
@@ -78,6 +88,7 @@ export function SelectContent({ children, className }: SelectContentProps) {
 							)}
 						/>
 					}
+					{...props}
 				>
 					<Select.List>{children}</Select.List>
 				</Select.Popup>
