@@ -1,0 +1,89 @@
+.root {
+	--scrollbar-lane: 8px;
+	--scrollbar-block-inset: 6px;
+	--scrollbar-end-padding: 1px;
+
+	position: relative;
+	overflow: hidden;
+}
+
+.viewport {
+	overscroll-behavior: contain;
+}
+
+.content {
+	padding-inline-end: var(--scrollbar-lane);
+}
+
+.scrollbar {
+	z-index: 2;
+	display: flex;
+	justify-content: flex-end;
+	width: var(--scrollbar-lane);
+	margin-block: var(--scrollbar-block-inset);
+	padding-inline-end: var(--scrollbar-end-padding);
+	cursor: pointer;
+	user-select: none;
+	touch-action: none;
+}
+
+.thumb {
+	width: 4px;
+	border-radius: 999px;
+	background: color-mix(in oklab, var(--text-muted) 38%, transparent);
+	transition: background-color 150ms ease-out;
+}
+
+.scrollbar[data-hovering] .thumb,
+.scrollbar[data-scrolling] .thumb {
+	background: color-mix(in oklab, var(--text-muted) 55%, transparent);
+}
+
+.fade {
+	pointer-events: none;
+	position: absolute;
+	inset-inline-start: 0;
+	inset-inline-end: var(--scrollbar-lane);
+	z-index: 1;
+	height: 24px;
+	opacity: 0;
+	transition: opacity 150ms ease-out;
+}
+
+.fadeStart {
+	top: 0;
+	background: linear-gradient(
+		to bottom,
+		color-mix(
+			in oklab,
+			var(--scroll-area-fade, var(--control)) 82%,
+			transparent
+		),
+		transparent
+	);
+}
+
+.fadeEnd {
+	bottom: 0;
+	background: linear-gradient(
+		to top,
+		color-mix(
+			in oklab,
+			var(--scroll-area-fade, var(--control)) 82%,
+			transparent
+		),
+		transparent
+	);
+}
+
+.root[data-overflow-y-start] .fadeStart,
+.root[data-overflow-y-end] .fadeEnd {
+	opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.fade,
+	.thumb {
+		transition: none;
+	}
+}
